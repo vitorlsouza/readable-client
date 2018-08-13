@@ -16,6 +16,7 @@ import * as actions from '../actions';
 class Category extends Component {
   state = {
     width: window.innerWidth,
+    loading: false,
   };
 
   updateDimensions = () => {
@@ -28,9 +29,17 @@ class Category extends Component {
       this.updateDimensions();
     });
 
-    this.props.getPostByCategory(this.props.location.pathname);
+    this.updateCategories();
+
     this.props.controlEditPost(false);
   }
+
+  updateCategories = () => {
+    this.setState({ loading: true });
+    this.props.getPostByCategory(this.props.location.pathname).then(() => {
+      this.setState({ loading: false });
+    });
+  };
 
   voteScorePostUp = id => {
     const option = 'upVote';
@@ -51,7 +60,9 @@ class Category extends Component {
   render() {
     return (
       <div className="content">
-        {this.props.postsCategory ? (
+        {this.state.loading ? (
+          <p>Loading Categories</p>
+        ) : (
           <FadeIn>
             <Grid>
               {this.props.postsCategory.map(post => (
@@ -115,8 +126,6 @@ class Category extends Component {
               ))}
             </Grid>
           </FadeIn>
-        ) : (
-          <p>Carregando Posts</p>
         )}
       </div>
     );
