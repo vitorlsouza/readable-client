@@ -1,7 +1,10 @@
 {
   "name": "readable",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
+  "engines": {
+    "node": "8.9.4"
+  },
   "dependencies": {
     "material-ui": "^0.20.0",
     "moment": "^2.20.1",
