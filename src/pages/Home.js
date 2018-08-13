@@ -26,7 +26,7 @@ class Home extends Component {
     this.props.posts ?
     setTimeout(() => {
       this.props.getPostId(this.props.posts[0]["id"])
-    }, 500)
+    }, 1000)
     : null
   }
 
